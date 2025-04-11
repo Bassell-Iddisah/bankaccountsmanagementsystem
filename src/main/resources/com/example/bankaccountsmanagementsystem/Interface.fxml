@@ -4,12 +4,13 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -48,7 +49,7 @@
                                      <Text layoutX="15.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Acount Type:" />
                                      <Text layoutX="15.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Maturity Date" />
                                      <ComboBox fx:id="dropdown" layoutX="14.0" layoutY="224.0" prefHeight="25.0" prefWidth="252.0" promptText="Select an Account Type" visibleRowCount="3" />
-                                     <DatePicker fx:id="selectMaturityDate" layoutX="15.0" layoutY="157.0" onAction="#getMaturationDate" prefHeight="25.0" prefWidth="98.0" />
+                                     <DatePicker fx:id="selectMaturityDate" layoutX="15.0" layoutY="157.0" prefHeight="25.0" prefWidth="98.0" />
                                      <Label layoutX="16.0" layoutY="182.0" text="Maturity date is only for fixed deposit accounts" textFill="#ff005c" />
                                      <Text layoutX="131.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minimum Deposit Amount" />
                                      <Button fx:id="createAccount" layoutX="69.0" layoutY="287.0" mnemonicParsing="false" onAction="#handleSubmit" prefHeight="35.0" prefWidth="145.0" text="Create Account" />
@@ -103,12 +104,9 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView layoutY="-1.0" prefHeight="376.0" prefWidth="600.0">
-                          <columns>
-                            <TableColumn prefWidth="298.0" text="Amount" />
-                            <TableColumn minWidth="0.0" prefWidth="301.0" text="Balance" />
-                          </columns>
-                        </TableView>
+                        <ListView fx:id="historyListView" prefHeight="370.0" prefWidth="600.0" />
+                        <ToggleButton fx:id="toggleTransactions" layoutX="497.0" layoutY="2.0" mnemonicParsing="false" onAction="#showTransactions" text="ToggleButton" />
+                        <TextArea fx:id="showLastTransactions" layoutX="11.0" layoutY="32.0" prefHeight="306.0" prefWidth="578.0" />
                      </children>
                   </AnchorPane>
                </content>

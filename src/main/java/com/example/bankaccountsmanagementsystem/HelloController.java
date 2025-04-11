@@ -6,16 +6,22 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
 import java.net.URL;
+import java.util.LinkedList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
+import javafx.scene.web.WebHistory;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 
 
 public class HelloController implements Initializable {
+
+    LinkedList<String> transactionHistory = new LinkedList<>();
+
     @FXML
     private TextField acc;
 
@@ -71,10 +77,21 @@ public class HelloController implements Initializable {
     private Button depositButton;
 
     @FXML
+    private ListView<String> historyListView;
+
+    @FXML
+    private ToggleButton toggleTransactions;
+
+    @FXML
+    private TextArea showLastTransactions;
+
+    @FXML
     void handleCheckBoxToggle(ActionEvent event) {
 //        System.out.println(enableMaturity.getState());enableMaturity.getState()
         selectMaturityDate.setDisable(true);
     }
+
+
 
 
 
@@ -168,7 +185,9 @@ public class HelloController implements Initializable {
         }
             currentAccount.currentBalance -= amount;
 
-        transactionsCurrentBalance.setText(String.format("Ghs %2f", currentAccount.currentBalance));
+        transactionHistory.add(String.format("Withdrew Ghs %f", amount));
+
+        transactionsCurrentBalance.setText(String.format("Ghs %2s", currentAccount.currentBalance));
 
     }
 
@@ -179,9 +198,14 @@ public class HelloController implements Initializable {
         }
         currentAccount.currentBalance += amount;
 
-        transactionsCurrentBalance.setText(String.format("Ghs %2f", currentAccount.currentBalance));
+        transactionHistory.add(String.format("Deposited Ghs %f", amount));
+
+        transactionsCurrentBalance.setText(String.format("Ghs %2s", currentAccount.currentBalance));
     }
 
-    public void getMaturationDate(ActionEvent event) {
+    @FXML
+    public void showTransactions(ActionEvent event) {
+        String history = String.join("\n", transactionHistory);
+        showLastTransactions.setText(history);
     }
 }

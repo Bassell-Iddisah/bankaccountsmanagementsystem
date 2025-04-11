@@ -2,7 +2,6 @@ package com.example.bankaccountsmanagementsystem;
 
 import java.time.LocalDate;
 import java.util.LinkedList;
-import java.util.Scanner;
 
 // Define interface for mandatory operations
 interface BankOperations {
@@ -26,12 +25,14 @@ abstract class Account implements BankOperations {
         this.currentBalance = 0;
     }
 
+    // Deposit money into the account
     public void deposit(double amount) {
         currentBalance += amount;
         transactionHistory.add("Deposited: " + amount);
         System.out.printf("Deposit successful. New balance: %.2f%n", currentBalance);
     }
 
+    // Withdraw money from the account
     public void withdraw(double amount) {
         if (currentBalance == 0 || currentBalance < amount) {
             System.out.println("Insufficient funds.");
@@ -42,10 +43,12 @@ abstract class Account implements BankOperations {
         System.out.printf("Withdrawal successful. New balance: %.2f%n", currentBalance);
     }
 
+    // Return current balance of active account
     public double getBalance() {
         return currentBalance;
     }
 
+    // Show last N transactions
     public void showLastNTransactions(int n) {
         int start = Math.max(0, transactionHistory.size() - n);
         for (int i = start; i < transactionHistory.size(); i++) {
@@ -75,7 +78,7 @@ class SavingsAccount extends Account {
 
 // Create CurrentAccount to inherit Account
 class CurrentAccount extends Account {
-    private static final double OVERDRAFT_LIMIT = 500.0;
+    private static final double OVERDRAFT_LIMIT = -500.0;
 
     public CurrentAccount(String accountNumber, String userName) {
         super(accountNumber, userName);
@@ -122,10 +125,8 @@ class FixedDepositAccount extends Account {
     }
 }
 
+// Begin the program
 public class bankaccountsmanagementsystem {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-//        System.out.println("Job Done");
     }
 }

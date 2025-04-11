@@ -68,6 +68,9 @@ public class HelloController implements Initializable {
     private Button withdrawButton;
 
     @FXML
+    private Button depositButton;
+
+    @FXML
     void handleCheckBoxToggle(ActionEvent event) {
 //        System.out.println(enableMaturity.getState());enableMaturity.getState()
         selectMaturityDate.setDisable(true);
@@ -158,10 +161,6 @@ public class HelloController implements Initializable {
         currentAccount.currentBalance += 1000;
     }
 
-    @FXML
-    public void getMaturationDate(ActionEvent event) {
-    }
-
     public void withdrawhandle(ActionEvent actionEvent) {
         double amount = Double.parseDouble(takeAmount.getText());
         if (amount == 0) {
@@ -169,10 +168,20 @@ public class HelloController implements Initializable {
         }
             currentAccount.currentBalance -= amount;
 
-        transactionsCurrentBalance.setText(String.format("Ghs %sf", currentAccount.currentBalance));
+        transactionsCurrentBalance.setText(String.format("Ghs %2f", currentAccount.currentBalance));
 
     }
 
     public void depositHandle(ActionEvent actionEvent) {
+        double amount = Double.parseDouble(addAmount.getText());
+        if (amount <= 0) {
+            System.out.println("Enter an amount above 0 to deposit");
+        }
+        currentAccount.currentBalance += amount;
+
+        transactionsCurrentBalance.setText(String.format("Ghs %2f", currentAccount.currentBalance));
+    }
+
+    public void getMaturationDate(ActionEvent event) {
     }
 }
